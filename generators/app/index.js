@@ -84,6 +84,10 @@ module.exports = yeoman.Base.extend({
     }
   },
 
+  default: function () {
+    this.composeWith('msb:editorconfig', {}, {local: require.resolve('../editorconfig')});
+  },
+
   writing: function () {
     let currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
