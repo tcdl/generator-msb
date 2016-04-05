@@ -28,6 +28,7 @@ describe('generator-msb:app', function () {
       },
       files: ['app'],
       keywords: this.answers.keywords,
+      private: true,
       main: 'app/index.js'
     });
   });

@@ -1,6 +1,6 @@
 'use strict';
 let yeoman = require('yeoman-generator');
-var _ = require('lodash');
+let _ = require('lodash');
 let chalk = require('chalk');
 let yosay = require('yosay');
 let path = require('path');
@@ -13,6 +13,12 @@ module.exports = yeoman.Base.extend({
       type: String,
       required: false,
       desc: 'Project name'
+    });
+
+    this.option('githubAccount', {
+      type: String,
+      required: false,
+      desc: 'GitHub username or organization'
     });
   },
 
@@ -37,7 +43,7 @@ module.exports = yeoman.Base.extend({
       this.log(yosay('Welcome to the ' + chalk.red('generator-msb') + ' generator!'));
     },
 
-    askForMicroserviceName: function () {
+    askForMicroservice: function () {
       let done = this.async();
 
       let prompts = [{
@@ -91,7 +97,7 @@ module.exports = yeoman.Base.extend({
   writing: function () {
     let currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-    var pkg = _.merge({
+    let pkg = _.merge({
       name: _.kebabCase(this.props.name),
       version: '0.0.0',
       description: this.props.description,
@@ -101,6 +107,7 @@ module.exports = yeoman.Base.extend({
       },
       files: ['app'],
       main: 'app/index.js',
+      private: true,
       keywords: []
     }, currentPkg);
 
