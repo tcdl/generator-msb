@@ -4,10 +4,13 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('msb:git', function () {
+  this.timeout(10000);
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
-        repositoryPath: 'yeoman/generator-node'
+        name: 'microservice',
+        githubAccount: 'tcdl',
+        submodule: 'https://github.com/tcdl/msb-newrelic.git'
       })
       .on('end', done);
   });
@@ -22,5 +25,9 @@ describe('msb:git', function () {
 
   it('initialize git repository', function () {
     assert.file('.git');
+  });
+
+  it('add submodule', function () {
+    assert.file('spec');
   });
 });

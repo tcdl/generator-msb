@@ -88,6 +88,29 @@ module.exports = yeoman.Base.extend({
         validate: function (str) {
           return str.length > 0;
         }
+      }, {
+        name: 'spec',
+        type: 'list',
+        message: 'Specification stored in',
+        choices: ['Git submodule', 'Spec folder', 'None'],
+        filter: _.kebabCase
+      }];
+
+      this.prompt(prompts, function (props) {
+        this.props = _.merge(this.props, props);
+        done();
+      }.bind(this));
+    },
+
+    askSubmodule: function () {
+      let done = this.async();
+      let prompts = [{
+        name: 'submodule',
+        message: 'URL spec submodule repository',
+        when: this.props.spec === 'git-submodule',
+        validate: function (str) {
+          return str.length > 0;
+        }
       }];
 
       this.prompt(prompts, function (props) {
@@ -102,7 +125,8 @@ module.exports = yeoman.Base.extend({
     this.composeWith('node:git', {
       options: {
         name: this.props.name,
-        githubAccount: this.props.githubAccount
+        githubAccount: this.props.githubAccount,
+        submodule: this.props.submodule
       }
     }, {
       local: require.resolve('../git')

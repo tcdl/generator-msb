@@ -16,12 +16,6 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'GitHub username or organization'
     });
-
-    this.option('submodule', {
-      type: String,
-      required: false,
-      desc: 'URL submodule repository'
-    });
   },
 
   initializing: function () {
@@ -56,11 +50,5 @@ module.exports = generators.Base.extend({
     this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
       cwd: this.destinationPath()
     });
-
-    if (this.options.submodule) {
-      this.spawnCommandSync('git', ['submodule', 'add', this.options.submodule, 'spec'], {
-        cwd: this.destinationPath()
-      });
-    }
   }
 });
