@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
-describe('generator-msb:app', function () {
+describe('msb:app', function () {
   before(function (done) {
     this.answers = {
       name: 'microservice',
@@ -31,5 +31,8 @@ describe('generator-msb:app', function () {
       private: true,
       main: 'app/index.js'
     });
+  });
+  it('creates template js files', function () {
+    assert.file(['app/index.js', 'app/routes/index.js', 'app/routes/users.js']);
   });
 });

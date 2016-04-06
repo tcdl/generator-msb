@@ -35,6 +35,11 @@ module.exports = yeoman.Base.extend({
       this.props.authorName = this.pkg.author.name;
       this.props.authorEmail = this.pkg.author.email;
     }
+
+    this.fs.copy(this.templatePath('app/index.js'), this.destinationPath('app/index.js'));
+    this.fs.copy(this.templatePath('app/routes/index.js'), this.destinationPath('app/routes/index.js'));
+    this.fs.copy(this.templatePath('app/routes/users.js'), this.destinationPath('app/routes/users.js'));
+    this.fs.copy(this.templatePath('bin/www'), this.destinationPath('bin/www'));
   },
 
   prompting: {
@@ -122,6 +127,7 @@ module.exports = yeoman.Base.extend({
 
   default: function () {
     this.composeWith('msb:editorconfig', {}, {local: require.resolve('../editorconfig')});
+    this.composeWith('msb:dependencies', {}, {local: require.resolve('../dependencies')});
     this.composeWith('node:git', {
       options: {
         name: this.props.name,
@@ -147,6 +153,7 @@ module.exports = yeoman.Base.extend({
       files: ['app'],
       main: 'app/index.js',
       private: true,
+      scripts: {start: "node ./bin/www"},
       keywords: []
     }, currentPkg);
 
