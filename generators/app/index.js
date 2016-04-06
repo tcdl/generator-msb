@@ -81,6 +81,13 @@ module.exports = yeoman.Base.extend({
         when: !this.props.authorEmail,
         default: this.user.git.email(),
         store: true
+      }, {
+        name: 'githubAccount',
+        message: 'GitHub username or organization',
+        store: true,
+        validate: function (str) {
+          return str.length > 0;
+        }
       }];
 
       this.prompt(prompts, function (props) {
@@ -92,6 +99,14 @@ module.exports = yeoman.Base.extend({
 
   default: function () {
     this.composeWith('msb:editorconfig', {}, {local: require.resolve('../editorconfig')});
+    this.composeWith('node:git', {
+      options: {
+        name: this.props.name,
+        githubAccount: this.props.githubAccount
+      }
+    }, {
+      local: require.resolve('../git')
+    });
   },
 
   writing: function () {
