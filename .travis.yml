@@ -5,3 +5,11 @@ node_js:
   - v4
 after_success:
   - npm run coveralls
+deploy:
+  provider: npm
+  email: integration-dev@thomascookonline.com
+  api_key:
+    secure: bwDUpF1P7lJcgaRBZjC/e4jUizVj70gUODGzbmxWCzZhgf0TbJcL6mPt5kBfwQEG1fuCAK12fkGT1cS0u3/kniiTT8R95ZSMIZKlw248lOPV7CnPsrXIWVD7lnv5I1YFSUQvyNRZsYMadsyI/SbadblksWO4c/kzRuk1vykgDRvAGBIhZvJo9nMye8cFjj06SFwCiI4iUqEN2gz1A2qamDtukhzNcMBWA4aPTfqoIeDwecnIwg9B6YFKZl47eGxdnW97J/UG3qLT5H91KZt+Wnd4H/At5X0aH/CrlkNjwADpAhRobAU0YP1fhKT235P3GBs+gXHFnE9CMJbyoD4b9TRuWYb3peVdf/kAJZNIQU8o4T+95skyYRhnpMMj+YFPianMr1z2ZTkKUrcnDLmyYh6zChkCJBsGsenBtc5hfCHNKPBUZNFPQ3V9GuC8aOU+7i2t2AUvA/bNEuTwyif+rE29DWojJ6sDv0WuOZbEJQITsroZs5vuJimEklfs6RQfhv3sxcK6of0BVOzp1kFLWMo3ClA3HupXGJbU9l47O/ry4AeUAdaxVZmkj68NNzzgl0JPTg2p62KaK0qyl9XqILUKPysEpspKiIvYeryV6kh26d5+5nUaQEwD2owhjLcYIYM4f/dCuUjuLTwfMst5mvb3xJy6SvOZiF81hSNrEes=
+  on:
+    tags: true
+    repo: tcdl/generator-msb
